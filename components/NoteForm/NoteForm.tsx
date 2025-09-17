@@ -1,6 +1,6 @@
 
 'use client';
-
+import type { NoteTag } from '../../types/note';
 import { useNoteStore } from '../../lib/store/noteStore';
 import { createNote } from '../../lib/api';
 import { useRouter } from 'next/navigation';
@@ -19,7 +19,11 @@ export default function NoteForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createNote(draft);
+    await createNote({
+      title: draft.title,
+      content: draft.content,
+      tag: draft.tag as NoteTag, 
+    });
     clearDraft();
     router.back();
   };
@@ -40,6 +44,8 @@ export default function NoteForm() {
           onChange={handleChange}
           className={css.input}
           required
+          minLength={3}
+          maxLength={50}
         />
       </div>
 
@@ -75,13 +81,21 @@ export default function NoteForm() {
       </div>
 
       <div className={css.actions}>
-        <button type="button" className={css.cancelButton} onClick={handleCancel}>
+        <button
+          type="button"
+          className={css.cancelButton}
+          onClick={handleCancel}
+          aria-label="Cancel note creation"
+        >
           Cancel
         </button>
-        <button type="submit" className={css.submitButton}>
+        <button
+          type="submit"
+          className={css.submitButton}
+          aria-label="Create note"
+        >
           Create note
         </button>
       </div>
     </form>
-  );
-}
+  );}
