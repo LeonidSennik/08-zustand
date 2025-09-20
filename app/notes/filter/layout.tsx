@@ -3,12 +3,12 @@ import { Roboto } from 'next/font/google';
 import type { Metadata } from 'next';
 
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal'], 
-  subsets: ['latin', 'cyrillic'],
-  display: 'swap',
-  variable: '--font-roboto',
-  adjustFontFallback: false, 
+  weight: ['400', '700'],           
+  style: ['normal'],                
+  subsets: ['latin', 'cyrillic'],   
+  display: 'swap',                 
+  variable: '--font-roboto',        
+  adjustFontFallback: false,       
 });
 
 export const metadata: Metadata = {
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 export default function RootLayout({
   children,
   sidebar,
